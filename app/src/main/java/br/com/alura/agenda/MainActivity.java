@@ -1,9 +1,17 @@
+/*
+Nesta aula, aprendemos a:
+
+    adicionar Views via código Java e via arquivo estático;
+    implementar layouts que apresentam listas;
+    utilizar AdapterViews em específico o ListView.
+ */
 package br.com.alura.agenda;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,8 +30,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         List<String> alunos = new ArrayList<>(
-                Arrays.asList("Alex", "Fran", "José"));
+                Arrays.asList("Alex", "Fran", "José", "Maxswell"));
         ListView listaDeAlunos = findViewById(R.id.activity_main_lista_de_alunos);
+        listaDeAlunos.setAdapter(new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                alunos));
+
 
 
     }
