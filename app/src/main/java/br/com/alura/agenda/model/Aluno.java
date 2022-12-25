@@ -17,6 +17,10 @@ public class Aluno implements Serializable {
         this.email = email;
     }
 
+    public Aluno() {
+
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -52,5 +56,9 @@ public class Aluno implements Serializable {
 
     public int getID() {
         return id;
+    }
+
+    public boolean idValidado() {
+        return id > 0;
     }
 }

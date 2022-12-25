@@ -1,5 +1,7 @@
 package br.com.alura.agenda.dao;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,20 +15,37 @@ public class AlunoDAO {
     public void salva(Aluno aluno) {
         aluno.setID(contadorDeIDs);
         alunos.add(aluno);
+        atualizaIDs();
+    }
+
+    private void atualizaIDs() {
         contadorDeIDs++;
     }
 
     public void edita(Aluno aluno) {
+        Aluno alunoEncontrado = buscaAlunoPeloId(aluno);
+        if (alunoEncontrado != null) {
+            int posicaoDoAluno = alunos.indexOf(alunoEncontrado);
+            alunos.set(posicaoDoAluno, aluno);
+        }
+    }
+
+    @Nullable
+    private Aluno buscaAlunoPeloId(Aluno aluno) {
         Aluno alunoEncontrado = null;
         for (Aluno a:
              alunos) {
             if (a.getID() == aluno.getID()) {
-                alunoEncontrado = a;
+                return a;
             }
         }
-        if (alunoEncontrado != null) {
-            int posicaoDoAluno = alunos.indexOf(alunoEncontrado);
-            alunos.set(posicaoDoAluno, aluno);
+        return null;
+    }
+
+    public void remove(Aluno aluno) {
+        Aluno alunoDevolvido = buscaAlunoPeloId(aluno);
+        if(alunoDevolvido != null){
+            alunos.remove(alunoDevolvido);
         }
     }
 
